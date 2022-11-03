@@ -35,7 +35,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String password = et.getText().toString();
-                checkPassWordComplexity(password);
+               if(checkPassWordComplexity(password)){
+                   tv.setText("PassWord met the requirements");
+               }
+               else{
+                   tv.setText("you shall not pass !");
+               }
+
             }
 
             /** This Function is to check password checking
