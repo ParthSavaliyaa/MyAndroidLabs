@@ -63,13 +63,7 @@ public class ChatRoom extends AppCompatActivity {
         messages = chatModel.messages.getValue();
         if (messages == null) {
             chatModel.messages.postValue(messages = new ArrayList<ChatMessage>());
-            Executor thread = Executors.newSingleThreadExecutor();
-            thread.execute(() ->
-            {
-                messages.addAll(mDAO.getAllMessages()); //Once you get the data from database
 
-                runOnUiThread(() -> binding.recycleView.setAdapter(myAdapter)); //You can then load the RecyclerView
-            });
         }
 
         boolean sent;
@@ -79,7 +73,7 @@ public class ChatRoom extends AppCompatActivity {
 
                 SimpleDateFormat sdf = new SimpleDateFormat("EEEE, dd-MMM-yyyy hh-mm-ss a");
                 String currentDateandTime = sdf.format(new Date());
-                chatMessage = new ChatMessage(textInput.getText().toString(), currentDateandTime, true);
+                chatMessage = new ChatMessage(textInput.getText().toString(), currentDateandTime, false);
                 chatMessage.setTimeSent(currentDateandTime);
                 chatMessage.setMessage(textInput.getText().toString());
                 chatMessage.setSentButton(true);
@@ -102,7 +96,7 @@ public class ChatRoom extends AppCompatActivity {
 
                 SimpleDateFormat sdf = new SimpleDateFormat("EEEE, dd-MMM-yyyy hh-mm-ss a");
                 String currentDateandTime = sdf.format(new Date());
-                chatMessage = new ChatMessage(textInput.getText().toString(), currentDateandTime, false);
+                chatMessage = new ChatMessage(textInput.getText().toString(), currentDateandTime, true);
                 chatMessage.setTimeSent(currentDateandTime);
                 chatMessage.setMessage(textInput.getText().toString());
                 chatMessage.setSentButton(false);

@@ -2,7 +2,6 @@ package algonquin.cst2335.sava0184;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity
@@ -18,7 +17,8 @@ public class ChatMessage {
     @ColumnInfo(name = "SendOrRecieve")
     public boolean isSentButton;
 
-    @Ignore
+    public  ChatMessage(){};
+
     ChatMessage(String m, String t, boolean sent)
     {
 
