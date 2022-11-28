@@ -1,110 +1,42 @@
 package algonquin.cst2335.sava0184;
 
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import algonquin.cst2335.sava0184.databinding.ActivityMainBinding;
 
 /**
  * @author Parth Savaliya
  * @version 1.0
  */
 public class MainActivity extends AppCompatActivity {
-    /**
-     * This hold textview
-     */
-    private TextView tv = null;
-    /**
-     * THis holds password
-     */
-    private EditText et = null;
-    private Button btn = null;
-
+    protected String cityName;
+    protected RequestQueue queue=null;
+ActivityMainBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        tv = findViewById(R.id.textview);
-        et = findViewById(R.id.edittext);
-        btn = findViewById(R.id.button);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String password = et.getText().toString();
-               if(checkPassWordComplexity(password)){
-                   tv.setText("PassWord met the requirements");
-               }
-               else{
-                   tv.setText("you shall not pass !");
-               }
 
-            }
 
-            /** This Function is to check password checking
-             *
-             *
-             * @param password The String Object that are we checking
-             * @retutn Return true if password is strong
-             */
+        binding= ActivityMainBinding.inflate( getLayoutInflater() );
+        queue = Volley.newRequestQueue(this);
 
-            boolean checkPassWordComplexity(String password) {
 
-                boolean foundUpperCase, foundLowerCase, foundNumber, foundSpecial;
+        binding.getForecast.setOnClickListener(click -> {
+            cityName = binding.cityTextField.getText().toString();
+            String stringURL="https://api.openweathermap.org/data/2.5/weather?q=cityName&appid={API key}";
+            JsonObjectRequest request =new JsonObjectRequest(Request.Method.GET,stringURL ,null,
+                    (response) -> {},
+                    (error) ->{ } );
+            queue.add(request);
 
-                foundUpperCase = foundLowerCase = foundNumber = foundSpecial = false;
-                if (!foundUpperCase) {
 
-                    Toast.makeText(getApplicationContext(), "Password should have atleast one upper case", Toast.LENGTH_SHORT).show();
-                    ;// Say that they are missing an upper case letter;
-
-                    return false;
-
-                } else if (!foundLowerCase) {
-                    Toast.makeText(getApplicationContext(), "Password should have atleast one Lowe case", Toast.LENGTH_SHORT).show();
-                    ;// Say that they are missing an lower case letter;
-
-                    return false;
-
-                } else if (!foundNumber) {
-                    Toast.makeText(getApplicationContext(), "Password should have atleast one Number", Toast.LENGTH_SHORT).show();
-                    ;// Say that they are missing a number;
-                    return false;
-                } else if (!foundSpecial) {
-                    Toast.makeText(getApplicationContext(), "Password should have atleast one Special character", Toast.LENGTH_SHORT).show();
-                    ;// Say that they are missing a special character ;
-                    return false;
-                } else
-
-                    return true; //only get here if they're all true
-
-            }
-
-            /**
-             *
-             * @param c Charachter
-             * @return returns true if it found the special character
-             */
-            boolean isSpecialCharacter(char c) {
-                switch (c) {
-                    case '#':
-                    case '?':
-                    case '*':
-                    case '%':
-                    case '^':
-                    case '$':
-                    case '&':
-                    case '!':
-                        return true;
-                    default:
-                        return false;
-                }
-            }
         });
-
-
     }
 }
