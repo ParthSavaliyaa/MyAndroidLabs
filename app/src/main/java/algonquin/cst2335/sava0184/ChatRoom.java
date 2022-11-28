@@ -1,6 +1,8 @@
 package algonquin.cst2335.sava0184;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -46,8 +48,11 @@ public class ChatRoom extends AppCompatActivity {
     private RecyclerView.Adapter myAdapter;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_room);
 
@@ -56,6 +61,7 @@ public class ChatRoom extends AppCompatActivity {
         sendButton = findViewById(R.id.sendButton);
         textInput = findViewById(R.id.textInput);
         recieveButton = findViewById(R.id.recieveButton);
+
 
         //  recyclerView.setLayoutManager(new LinearLayoutManager(this));
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 5);
@@ -75,6 +81,7 @@ public class ChatRoom extends AppCompatActivity {
             tx.addToBackStack("");
             tx.commit();
         });
+
 
         boolean sent;
         sendButton.setOnClickListener(new View.OnClickListener() {
@@ -178,6 +185,9 @@ public class ChatRoom extends AppCompatActivity {
 
 
     }
+
+
+
 
     private class MyRowHolder extends RecyclerView.ViewHolder {
         TextView messageText, timeText;
