@@ -268,10 +268,7 @@ public class ChatRoom extends AppCompatActivity {
                 {
                     //                             messages.addAll( mDAO.getAllMessages() ); //Once you get the data from database
                     mDAO.deleteAll();
-                    for (int i = 0; i < messages.size(); i++) {
-                        messages.remove(i);
-
-                    }
+                    recyclerView.setAdapter(null);
 
                     //You can then load the RecyclerView
                 });
