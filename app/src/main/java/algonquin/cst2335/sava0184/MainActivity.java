@@ -130,13 +130,13 @@ public class MainActivity extends AppCompatActivity {
 
                             queue.add(imgReq);
                             runOnUiThread(() -> {
-                                temp.setText("The current temp is " + current);
+                                temp.setText("The current temp is " + current+"Celcius");
                                 temp.setVisibility(View.VISIBLE);
-                                minTemp.setText("The min temperature is " + mintemp);
+                                minTemp.setText("The min temperature is " + mintemp+"celcius");
                                 minTemp.setVisibility(View.VISIBLE);
-                                maxTemp.setText("The max temp is " + maxtemp);
+                                maxTemp.setText("The max temp is " + maxtemp+"celcisus");
                                 maxTemp.setVisibility(View.VISIBLE);
-                                humidity.setText("The humidity is " + Humidity);
+                                humidity.setText("The humidity is " + Humidity+"%");
                                 humidity.setVisibility(View.VISIBLE);
                                 icon.setImageBitmap(image);
                                 icon.setVisibility(View.VISIBLE);
